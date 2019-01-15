@@ -113,6 +113,9 @@ if [ $FWTYPE == "dynamic" ]; then
             lipo -create ${DYLIBS[@]} -output $FWDIR/$FWNAME
             cp -r include/$FWNAME/* $FWDIR/Headers/
             cp -L assets/$SYS/Info.plist $FWDIR/Info.plist
+			cp -r assets/$SYS/Headers/* $FWDIR/Headers/
+			mkdir -p $FWDIR/Modules
+			cp -r assets/$SYS/Modules/* $FWDIR/Modules/
             echo "Created $FWDIR"
             check_bitcode $FWDIR
         else
@@ -132,6 +135,9 @@ else
             libtool -static -o $FWDIR/$FWNAME lib/libcrypto-$SYS.a lib/libssl-$SYS.a
             cp -r include/$FWNAME/* $FWDIR/Headers/
             cp -L assets/$SYS/Info.plist $FWDIR/Info.plist
+			cp -r assets/$SYS/Headers/* $FWDIR/Headers/
+			mkdir -p $FWDIR/Modules
+			cp -r assets/$SYS/Modules/* $FWDIR/Modules/
             echo "Created $FWDIR"
             check_bitcode $FWDIR
         else
